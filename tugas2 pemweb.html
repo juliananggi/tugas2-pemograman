@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Mahasiswa</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-image: url(4089587690.jpg);
+      }
+      /* Kombinasi warna yang diinginkan */
+      #Anggi {
+        background-color: #d4eded;
+        border-radius: 8px;
+        padding: 20px;
+        max-width: 600px;
+        margin: 20px auto;
+        box-shadow: 0 4px 8px rgba(1, 39, 141, 0.1);
+      }
+
+      h3 {
+        color: #6a7f39;
+      }
+
+      label {
+        color: #397f76;
+      }
+
+      input {
+        background-color: #e6ccb2;
+        border: 2px solid #ddd292;
+        color: #7a7f39;
+      }
+
+      button {
+        background-color: #68a2b0;
+        color: #ede0d4;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #448a9c;
+      }
+
+      table th {
+        background-color: #5e7f39;
+        color: #ede0d4;
+      }
+
+      table td {
+        background-color: #b2c0e6;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #ddb892;
+      }
+
+      tbody tr:hover {
+        background-color: #9c6644;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="Anggi" class="container">
+      <!-- Form dan tabel akan dibuat secara dinamis melalui JavaScript -->
+    </div>
+
+    <script>
+      function createForm() {
+        // Membuat elemen form secara dinamis
+        const formContainer = document.getElementById("Anggi");
+
+        // Membuat form HTML dengan kombinasi warna yang diinginkan
+        const formHTML = `
+        <h3 class="text-center">IDENTITAS MAHASISWA</h3>
+        <div class="mb-3">
+          <label for="no" class="form-label">No:</label>
+          <input type="text" id="no" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="nim" class="form-label">NIM:</label>
+          <input type="text" id="nim" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="nama" class="form-label">Nama:</label>
+          <input type="text" id="nama" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="prodi" class="form-label">Prodi:</label>
+          <input type="text" id="prodi" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="kelas" class="form-label">Kelas:</label>
+          <input type="text" id="kelas" class="form-control">
+        </div>
+        <button id="submitBtn" class="btn w-100">Submit</button>
+        <hr>
+      `;
+        formContainer.innerHTML = formHTML;
+
+        // Membuat tabel secara dinamis menggunakan DOM
+        const tableHTML = `
+        <table class="table table-bordered mt-3">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>NIM</th>
+              <th>Nama</th>
+              <th>Prodi</th>
+              <th>Kelas</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      `;
+        formContainer.innerHTML += tableHTML;
+
+        // Event listener untuk tombol submit
+        document
+          .getElementById("submitBtn")
+          .addEventListener("click", addToTable);
+      }
+
+      function addToTable() {
+        const no = document.getElementById("no").value;
+        const nim = document.getElementById("nim").value;
+        const nama = document.getElementById("nama").value;
+        const prodi = document.getElementById("prodi").value;
+        const kelas = document.getElementById("kelas").value;
+
+        if (no && nim && nama && prodi && kelas) {
+          // Membuat baris tabel baru
+          const tableBody = document.getElementById("tableBody");
+          const row = document.createElement("tr");
+
+          // Menambahkan data ke dalam baris baru
+          row.innerHTML = `
+          <td>${no}</td>
+          <td>${nim}</td>
+          <td>${nama}</td>
+          <td>${prodi}</td>
+          <td>${kelas}</td>
+        `;
+
+          tableBody.appendChild(row);
+
+          // Mengosongkan form setelah submit
+          document.getElementById("no").value = "";
+          document.getElementById("nim").value = "";
+          document.getElementById("nama").value = "";
+          document.getElementById("prodi").value = "";
+          document.getElementById("kelas").value = "";
+        } else {
+          alert("Harap lengkapi semua data!");
+        }
+      }
+
+      // Memanggil fungsi createForm saat halaman di-load
+      createForm();
+    </script>
+  </body>
+</html>
